@@ -11,3 +11,8 @@
   width: 40px;
   text-align: center;
 }
+
+.pagination-item:hover {
+  background-color: aqua;
+  cursor: pointer;
+}

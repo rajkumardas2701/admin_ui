@@ -15,7 +15,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    fetchPaginatedUsers(setPaginatedUsers, users, 1);
+    fetchPaginatedUsers(setPaginatedUsers, users, 0);
   }, [users]);
   return (
     <div className="App">
@@ -24,7 +24,7 @@ const App = () => {
       <PaginationContext.Provider value={paginatedUsers}>
         <Users />
       </PaginationContext.Provider>
-      <Pagination users={users} />
+      <Pagination users={users} setPaginatedUsers={setPaginatedUsers} />
     </div>
   );
 };

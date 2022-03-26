@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // import PaginationContext from '../context/PaginationContext';
-import { fetchPages } from '../helper/helperMethods';
+import { fetchPages, fetchPaginatedUsers } from '../helper/helperMethods';
 import '../styles/Pagination.css';
 
-const Pagination = ({ users }) => {
-  // const [firstPage, setFirstPage] = useState(1);
-  // const users = useContext(PaginationContext);
+const Pagination = ({ users, setPaginatedUsers }) => {
   const [pages, setPages] = useState([]);
   useEffect(() => {
     fetchPages(users, setPages);
   }, [users]);
+
+  const handlePageClick = (event) => {
+    event.preventDefault();
+    fetchPaginatedUsers(setPaginatedUsers, users, (Number(event.target.id) - 1));
+  };
+
   return (
-    <ul className="pagination-main">
+    <div className="pagination-main">
       <button type="button">Prev</button>
       {
-          pages && pages.map((page) => <li key={page} className="pagination-item">{page}</li>)
+          pages && pages.map((page) => <button type="button" key={page} className="pagination-item" id={page} onClick={handlePageClick}>{page}</button>)
       }
       <button type="button">Next</button>
-    </ul>
+    </div>
   );
 };
 
 Pagination.propTypes = {
   users: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  // setUsers: PropTypes.func.isRequired,
+  setPaginatedUsers: PropTypes.func.isRequired,
 };
 
 export default Pagination;

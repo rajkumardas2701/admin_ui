@@ -1,12 +1,8 @@
-const fetchPaginatedUsers = (setPaginatedUsers, users, firstPage) => {
-  // for (let i = firstPage; i < 10; i += 1) {
-  //   filteredUsers.push(Number(users.id) === i);
-  // }
-  // console.log(typeof users);
+const fetchPaginatedUsers = (setPaginatedUsers, users, currentPage) => {
+  const current = (currentPage * 10) + 1;
   const filteredUsers = users.filter(
-    (user) => (user.id >= firstPage && user.id <= (firstPage + 9)),
+    (user) => (user.id >= current && user.id <= (current + 9)),
   );
-  // console.log(typeof filteredUsers);
   setPaginatedUsers(filteredUsers);
 };
 
