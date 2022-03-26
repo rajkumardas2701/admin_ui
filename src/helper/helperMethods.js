@@ -6,10 +6,11 @@ const fetchPaginatedUsers = (setPaginatedUsers, users, currentPage) => {
   setPaginatedUsers(filteredUsers);
 };
 
-const fetchPages = (users, setPages) => {
+const fetchPages = (users, setPages, startPage) => {
   const count = Math.ceil(users.length / 10);
+  const temp = count < (startPage + 3) ? count : (startPage + 3);
   const res = [];
-  for (let i = 0; i < count; i += 1) {
+  for (let i = startPage; i < temp; i += 1) {
     res.push(i + 1);
   }
   setPages(res);

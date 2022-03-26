@@ -4,25 +4,26 @@ import PaginationContext from '../context/PaginationContext';
 
 const Users = () => {
   const users = useContext(PaginationContext);
-  console.log(users);
+  // console.log(users);
   return (
     <div>
       <table className="users-table">
-        <tr>
-          <th>
-            Name
-          </th>
-          <th>
-            Email
-          </th>
-          <th>
-            Role
-          </th>
-          <th>
-            Actions
-          </th>
-        </tr>
-        {
+        <tbody>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Role
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+          {
             users.map((user) => (
               <tr key={user.id}>
                 <td>{user.name}</td>
@@ -32,6 +33,7 @@ const Users = () => {
               </tr>
             ))
           }
+        </tbody>
       </table>
     </div>
   );
