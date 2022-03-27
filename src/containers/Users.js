@@ -5,18 +5,21 @@ import PaginationContext from '../context/PaginationContext';
 const Users = () => {
   const users = useContext(PaginationContext);
   const [selectedUsers, setSelectedUser] = useState([]);
-  // const [selectAllChecked, setSelectAllChecked] = useState(false);
-  // console.log(users);
-  const handleClickAll = () => {
-    // setSelectAllChecked(event.target.checked);
-    setSelectedUser(users.map((user) => user.id));
+  const handleClickAll = (event) => {
+    if (!event.target.checked) {
+      setSelectedUser([]);
+    } else {
+      setSelectedUser(users.map((user) => user.id));
+    }
   };
-  console.log(selectedUsers);
   const handleSingleUser = (event) => {
-    // console.log(event.target.parentElement.parentElement.id);
-    setSelectedUser(selectedUsers.filter(
-      (user) => user.id !== event.target.parentElement.parentElement.id,
-    ));
+    if (!selectedUsers.includes(event.target.parentElement.parentElement.id)) {
+      setSelectedUser([...selectedUsers, event.target.parentElement.parentElement.id]);
+    } else {
+      setSelectedUser(selectedUsers.filter(
+        (id) => id !== event.target.parentElement.parentElement.id,
+      ));
+    }
   };
   return (
     <div>
@@ -57,10 +60,4 @@ const Users = () => {
   );
 };
 
-// Users.propTypes = {
-//   users: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-// };
-
 export default Users;
-
-// key={user.id} style={{ textAlign: 'left' }}

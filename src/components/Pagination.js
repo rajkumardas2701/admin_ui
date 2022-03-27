@@ -46,7 +46,7 @@ const Pagination = ({ users, setPaginatedUsers }) => {
           )
       }
           <button type="button" onClick={handleNextButton} disabled={startPage + 3 === Math.ceil(users.length / 10)}>Next</button>
-          {console.log(startPage)}
+          {/* {console.log(startPage)} */}
         </div>
         )
       }
