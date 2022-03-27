@@ -5,7 +5,7 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import UserContext from '../context/UserContext';
 
 const Users = () => {
-  const [users, paginatedUsers, setUsers, activePage] = useContext(UserContext);
+  const [users, paginatedUsers, setUsers, activePage, loadingError] = useContext(UserContext);
   const [selectedUsers, setSelectedUser] = useState([]);
   const handleClickAll = (event) => {
     if (!event.target.checked) {
@@ -29,7 +29,6 @@ const Users = () => {
   };
   const handleEditUser = () => {};
   const handleDeleteUser = (event) => {
-    // alert('Are you sure you want to delete?');
     event.preventDefault();
     setUsers(users.filter(
       (user) => user.id !== event.target.parentNode.parentNode.parentElement.id,
@@ -37,26 +36,28 @@ const Users = () => {
   };
   return (
     <div className="users-body">
-      <table className="users-table">
-        <tbody>
-          <tr className="table-head">
-            <th>
-              <input type="checkbox" onChange={handleClickAll} />
-            </th>
-            <th>
-              Name
-            </th>
-            <th>
-              Email
-            </th>
-            <th>
-              Role
-            </th>
-            <th>
-              Actions
-            </th>
-          </tr>
-          {
+      {
+        loadingError ? (<p className="user-load-error">Failed to load users, please check your internet connectivity.</p>) : (
+          <table className="users-table">
+            <tbody>
+              <tr className="table-head">
+                <th>
+                  <input type="checkbox" onChange={handleClickAll} />
+                </th>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Email
+                </th>
+                <th>
+                  Role
+                </th>
+                <th>
+                  Actions
+                </th>
+              </tr>
+              {
             paginatedUsers.map((user) => (
               <tr key={user.id} id={user.id} className="table-rows">
                 <td><input type="checkbox" checked={selectedUsers.includes(user.id)} onChange={handleSingleUser} /></td>
@@ -70,8 +71,10 @@ const Users = () => {
               </tr>
             ))
           }
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        )
+      }
       <button type="button" onClick={handleDeleteSelectUser} className="select-delete-btn">Delete selected user(s)</button>
     </div>
   );

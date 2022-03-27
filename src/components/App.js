@@ -9,12 +9,13 @@ import Search from './Search';
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  const [loadingError, setLoadingError] = useState(false);
   const [searchedUsers, setSearchedUsers] = useState(users);
   const [paginatedUsers, setPaginatedUsers] = useState(searchedUsers);
   const [activePage, setActivePage] = useState(1);
 
   useEffect(() => {
-    fetchUsers(setUsers);
+    fetchUsers(setUsers, setLoadingError);
   }, []);
   useEffect(() => {
     setSearchedUsers(users);
@@ -27,7 +28,10 @@ const App = () => {
       <h3 className="header">Admin UI</h3>
       <div className="app-body">
         <Search users={users} setSearchedUsers={setSearchedUsers} />
-        <UserContext.Provider value={[searchedUsers, paginatedUsers, setUsers, activePage]}>
+        <UserContext.Provider value={
+          [searchedUsers, paginatedUsers, setUsers, activePage, loadingError]
+}
+        >
           <Users />
         </UserContext.Provider>
         <Pagination

@@ -26,3 +26,11 @@
 .select-delete-btn:hover {
   cursor: pointer;
 }
+
+.user-load-error {
+  width: 100%;
+  color: red;
+  font-size: 40px;
+  margin: 100px auto;
+  text-align: center;
+}
