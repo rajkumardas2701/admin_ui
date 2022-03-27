@@ -24,17 +24,19 @@ const App = () => {
   }, [searchedUsers]);
   return (
     <div className="App">
-      <h3>Admin UI</h3>
-      <Search users={users} setSearchedUsers={setSearchedUsers} />
-      <UserContext.Provider value={[searchedUsers, paginatedUsers, setUsers, activePage]}>
-        <Users />
-      </UserContext.Provider>
-      <Pagination
-        searchedUsers={searchedUsers}
-        setPaginatedUsers={setPaginatedUsers}
-        activePage={activePage}
-        setActivePage={setActivePage}
-      />
+      <h3 className="header">Admin UI</h3>
+      <div className="app-body">
+        <Search users={users} setSearchedUsers={setSearchedUsers} />
+        <UserContext.Provider value={[searchedUsers, paginatedUsers, setUsers, activePage]}>
+          <Users />
+        </UserContext.Provider>
+        <Pagination
+          searchedUsers={searchedUsers}
+          setPaginatedUsers={setPaginatedUsers}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
+      </div>
     </div>
   );
 };

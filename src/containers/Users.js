@@ -36,10 +36,10 @@ const Users = () => {
     ));
   };
   return (
-    <div>
+    <div className="users-body">
       <table className="users-table">
         <tbody>
-          <tr>
+          <tr className="table-head">
             <th>
               <input type="checkbox" onChange={handleClickAll} />
             </th>
@@ -58,7 +58,7 @@ const Users = () => {
           </tr>
           {
             paginatedUsers.map((user) => (
-              <tr key={user.id} id={user.id}>
+              <tr key={user.id} id={user.id} className="table-rows">
                 <td><input type="checkbox" checked={selectedUsers.includes(user.id)} onChange={handleSingleUser} /></td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
@@ -72,9 +72,7 @@ const Users = () => {
           }
         </tbody>
       </table>
-      <button type="button" onClick={handleDeleteSelectUser}>Delete selected user(s)</button>
-      {/* {console.log(users.length)}
-      {console.log(paginatedUsers.length)} */}
+      <button type="button" onClick={handleDeleteSelectUser} className="select-delete-btn">Delete selected user(s)</button>
     </div>
   );
 };

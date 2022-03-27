@@ -3,6 +3,9 @@
   flex-direction: row;
   height: 40px;
   padding: 0;
+  position: absolute;
+  bottom: 30vh;
+  left: 45vw;
 }
 
 .pagination-item {
@@ -12,10 +15,6 @@
   text-align: center;
 }
 
-.pagination-item:hover {
-  background-color: aqua;
-}
-
 .pagination-item:hover,
 .delete-user,
 .edit-user {
@@ -23,7 +22,9 @@
 }
 
 .active-page {
-  background-color: blueviolet;
+  background-color: black;
+  color: white;
+  font-size: larger;
 }
 
 .delete-user {

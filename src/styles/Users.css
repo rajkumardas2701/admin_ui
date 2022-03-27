@@ -1,4 +1,28 @@
 .users-table {
-  width: 80%;
+  width: 90%;
   text-align: left;
+  margin: auto;
+  /* height: 20vh; */
+}
+
+.users-body {
+  width: 100%;
+}
+
+.table-rows,
+.table-head {
+  height: 30px;
+}
+
+.select-delete-btn {
+  margin-left: 5vw;
+  height: 40px;
+  position: absolute;
+  top: 60vh;
+  background-color: rgb(247, 88, 88);
+  color: white;
+  font-weight: 400;
+}
+.select-delete-btn:hover {
+  cursor: pointer;
 }

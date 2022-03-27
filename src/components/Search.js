@@ -19,7 +19,7 @@ const Search = ({ users, setSearchedUsers }) => {
     }
   }, [searchString]);
   return (
-    <div>
+    <div className="search-component">
       <input type="text" className="search-box" value={searchString} onChange={handleChange} />
     </div>
   );

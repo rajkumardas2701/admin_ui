@@ -1,4 +1,19 @@
 .App {
   width: 80%;
-  margin: auto;
+  margin: 5vh auto;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  height: 80vh;
+  padding: 10px;
+  box-shadow: 10px 10px rgba(133, 130, 130, 0.253);
+}
+
+.app-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  margin-left: 5vw;
 }
