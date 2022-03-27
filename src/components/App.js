@@ -12,7 +12,6 @@ const App = () => {
 
   useEffect(() => {
     fetchUsers(setUsers);
-    console.log('api call initiated');
   }, []);
 
   useEffect(() => {
@@ -22,7 +21,8 @@ const App = () => {
     <div className="App">
       <h3>Admin UI</h3>
       <input type="text" className="search-box" />
-      <PaginationContext.Provider value={[paginatedUsers, setUsers]}>
+      {/* {console.log('paginated users in jsx', paginatedUsers)} */}
+      <PaginationContext.Provider value={[users, paginatedUsers, setUsers]}>
         <Users />
       </PaginationContext.Provider>
       <Pagination users={users} setPaginatedUsers={setPaginatedUsers} />

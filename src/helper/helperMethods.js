@@ -1,8 +1,6 @@
 const fetchPaginatedUsers = (setPaginatedUsers, users, currentPage) => {
   const current = (currentPage * 10) + 1;
-  const filteredUsers = users.filter(
-    (user) => (user.id >= current && user.id <= (current + 9)),
-  );
+  const filteredUsers = users.slice(current - 1, 10);
   setPaginatedUsers(filteredUsers);
 };
 

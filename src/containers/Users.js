@@ -5,7 +5,9 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import PaginationContext from '../context/PaginationContext';
 
 const Users = () => {
-  const [users, setUsers] = useContext(PaginationContext);
+  const [users, paginatedUsers, setUsers] = useContext(PaginationContext);
+  // console.log(users);
+  // console.log(paginatedUsers);
   const [selectedUsers, setSelectedUser] = useState([]);
   const handleClickAll = (event) => {
     if (!event.target.checked) {
@@ -24,9 +26,12 @@ const Users = () => {
     }
   };
 
-  const handleDeleteUser = () => {
+  const handleDeleteSelectUser = () => {
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
   };
+
+  const handleEditUser = () => {};
+  const handleDeleteUser = () => {};
   return (
     <div>
       <table className="users-table">
@@ -49,22 +54,22 @@ const Users = () => {
             </th>
           </tr>
           {
-            users.map((user) => (
+            paginatedUsers.map((user) => (
               <tr key={user.id} id={user.id}>
                 <td><input type="checkbox" checked={selectedUsers.includes(user.id)} onChange={handleSingleUser} /></td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
-                  <FontAwesomeIcon icon={faPenToSquare} className="edit-user" />
-                  <FontAwesomeIcon icon={faTrash} className="delete-user" />
+                  <FontAwesomeIcon icon={faPenToSquare} className="edit-user" onClick={handleEditUser} />
+                  <FontAwesomeIcon icon={faTrash} className="delete-user" onClick={handleDeleteUser} />
                 </td>
               </tr>
             ))
           }
         </tbody>
       </table>
-      <button type="button" onClick={handleDeleteUser}>Delete selected user(s)</button>
+      <button type="button" onClick={handleDeleteSelectUser}>Delete selected user(s)</button>
     </div>
   );
 };
