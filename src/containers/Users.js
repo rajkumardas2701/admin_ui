@@ -25,12 +25,12 @@ const Users = () => {
     }
   };
   const handleDeleteSelectUser = () => {
-    // console.log(selectedUsers);
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
   };
   const handleEditUser = () => {};
   const handleDeleteUser = (event) => {
     // alert('Are you sure you want to delete?');
+    event.preventDefault();
     setUsers(users.filter(
       (user) => user.id !== event.target.parentNode.parentNode.parentElement.id,
     ));
@@ -73,6 +73,8 @@ const Users = () => {
         </tbody>
       </table>
       <button type="button" onClick={handleDeleteSelectUser}>Delete selected user(s)</button>
+      {/* {console.log(users.length)}
+      {console.log(paginatedUsers.length)} */}
     </div>
   );
 };

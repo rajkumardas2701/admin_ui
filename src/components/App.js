@@ -5,28 +5,32 @@ import Pagination from './Pagination';
 import { fetchPaginatedUsers } from '../helper/helperMethods';
 import '../styles/App.css';
 import UserContext from '../context/UserContext';
+import Search from './Search';
 
 const App = () => {
   const [users, setUsers] = useState([]);
-  const [paginatedUsers, setPaginatedUsers] = useState(users);
+  const [searchedUsers, setSearchedUsers] = useState(users);
+  const [paginatedUsers, setPaginatedUsers] = useState(searchedUsers);
   const [activePage, setActivePage] = useState(1);
 
   useEffect(() => {
     fetchUsers(setUsers);
   }, []);
-
   useEffect(() => {
-    fetchPaginatedUsers(setPaginatedUsers, users, 0);
+    setSearchedUsers(users);
   }, [users]);
+  useEffect(() => {
+    fetchPaginatedUsers(setPaginatedUsers, searchedUsers, 0);
+  }, [searchedUsers]);
   return (
     <div className="App">
       <h3>Admin UI</h3>
-      <input type="text" className="search-box" />
-      <UserContext.Provider value={[users, paginatedUsers, setUsers, activePage]}>
+      <Search users={users} setSearchedUsers={setSearchedUsers} />
+      <UserContext.Provider value={[searchedUsers, paginatedUsers, setUsers, activePage]}>
         <Users />
       </UserContext.Provider>
       <Pagination
-        users={users}
+        searchedUsers={searchedUsers}
         setPaginatedUsers={setPaginatedUsers}
         activePage={activePage}
         setActivePage={setActivePage}

@@ -4,24 +4,24 @@ import { fetchPages, fetchPaginatedUsers } from '../helper/helperMethods';
 import '../styles/Pagination.css';
 
 const Pagination = ({
-  users, setPaginatedUsers, activePage, setActivePage,
+  searchedUsers, setPaginatedUsers, activePage, setActivePage,
 }) => {
   const [pages, setPages] = useState([]);
   const [startPage, setStartPage] = useState(0);
   useEffect(() => {
-    fetchPages(users, setPages, startPage);
-  }, [users, startPage]);
+    fetchPages(searchedUsers, setPages, startPage);
+  }, [searchedUsers, startPage]);
 
   const handlePageClick = (event) => {
     event.preventDefault();
-    fetchPaginatedUsers(setPaginatedUsers, users, (Number(event.target.id) - 1));
+    fetchPaginatedUsers(setPaginatedUsers, searchedUsers, (Number(event.target.id) - 1));
     setActivePage(Number(event.target.id));
   };
 
   const handlePrevButton = () => {
     if (startPage > 0) {
       setStartPage(startPage - 1);
-      fetchPaginatedUsers(setPaginatedUsers, users, startPage - 1);
+      fetchPaginatedUsers(setPaginatedUsers, searchedUsers, startPage - 1);
       setActivePage(startPage);
     }
   };
@@ -29,7 +29,7 @@ const Pagination = ({
   const handleNextButton = () => {
     if (startPage + 2 <= pages.length) {
       setStartPage(startPage + 1);
-      fetchPaginatedUsers(setPaginatedUsers, users, startPage + 1);
+      fetchPaginatedUsers(setPaginatedUsers, searchedUsers, startPage + 1);
       setActivePage(startPage + 2);
     }
   };
@@ -45,7 +45,7 @@ const Pagination = ({
             (page) => <button type="button" key={page} className={`pagination-item ${activePage === page ? 'active-page' : ''}`} id={page} onClick={handlePageClick}>{page}</button>,
           )
       }
-          <button type="button" onClick={handleNextButton} disabled={startPage + 3 === Math.ceil(users.length / 10)}>Next</button>
+          <button type="button" onClick={handleNextButton} disabled={startPage + 3 === Math.ceil(searchedUsers.length / 10)}>Next</button>
           {/* {console.log(startPage)} */}
         </div>
         )
@@ -60,7 +60,7 @@ Pagination.defaultProps = {
 };
 
 Pagination.propTypes = {
-  users: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  searchedUsers: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   activePage: PropTypes.number,
   setActivePage: PropTypes.func,
   setPaginatedUsers: PropTypes.func.isRequired,
