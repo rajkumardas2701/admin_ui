@@ -29,7 +29,12 @@ const Users = () => {
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
   };
   const handleEditUser = () => {};
-  const handleDeleteUser = () => {};
+  const handleDeleteUser = (event) => {
+    // alert('Are you sure you want to delete?');
+    setUsers(users.filter(
+      (user) => user.id !== event.target.parentNode.parentNode.parentElement.id,
+    ));
+  };
   return (
     <div>
       <table className="users-table">
