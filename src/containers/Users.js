@@ -3,7 +3,7 @@ import '../styles/Users.css';
 import PaginationContext from '../context/PaginationContext';
 
 const Users = () => {
-  const users = useContext(PaginationContext);
+  const [users, setUsers] = useContext(PaginationContext);
   const [selectedUsers, setSelectedUser] = useState([]);
   const handleClickAll = (event) => {
     if (!event.target.checked) {
@@ -20,6 +20,10 @@ const Users = () => {
         (id) => id !== event.target.parentElement.parentElement.id,
       ));
     }
+  };
+
+  const handleDeleteUser = () => {
+    setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
   };
   return (
     <div>
@@ -55,7 +59,7 @@ const Users = () => {
           }
         </tbody>
       </table>
-      <button type="button">Delete selected user(s)</button>
+      <button type="button" onClick={handleDeleteUser}>Delete selected user(s)</button>
     </div>
   );
 };
