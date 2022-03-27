@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import '../styles/Users.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import PaginationContext from '../context/PaginationContext';
 
 const Users = () => {
@@ -53,7 +55,10 @@ const Users = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>edit, delete</td>
+                <td>
+                  <FontAwesomeIcon icon={faPenToSquare} className="edit-user" />
+                  <FontAwesomeIcon icon={faTrash} className="delete-user" />
+                </td>
               </tr>
             ))
           }

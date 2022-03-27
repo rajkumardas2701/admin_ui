@@ -14,9 +14,23 @@
 
 .pagination-item:hover {
   background-color: aqua;
+}
+
+.pagination-item:hover,
+.delete-user,
+.edit-user {
   cursor: pointer;
 }
 
 .active-page {
   background-color: blueviolet;
+}
+
+.delete-user {
+  color: red;
+  margin-left: 20px;
+}
+
+.edit-user {
+  color: blue;
 }
