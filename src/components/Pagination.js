@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import PaginationContext from '../context/PaginationContext';
 import { fetchPages, fetchPaginatedUsers } from '../helper/helperMethods';
 import '../styles/Pagination.css';
 
-const Pagination = ({ users, setPaginatedUsers }) => {
+const Pagination = ({
+  users, setPaginatedUsers, activePage, setActivePage,
+}) => {
   const [pages, setPages] = useState([]);
   const [startPage, setStartPage] = useState(0);
-  const [activePage, setActivePage] = useState(1);
   useEffect(() => {
     fetchPages(users, setPages, startPage);
   }, [users, startPage]);
@@ -54,8 +54,15 @@ const Pagination = ({ users, setPaginatedUsers }) => {
   );
 };
 
+Pagination.defaultProps = {
+  activePage: 1,
+  setActivePage: () => {},
+};
+
 Pagination.propTypes = {
   users: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  activePage: PropTypes.number,
+  setActivePage: PropTypes.func,
   setPaginatedUsers: PropTypes.func.isRequired,
 };
 

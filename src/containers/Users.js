@@ -2,18 +2,17 @@ import React, { useContext, useState } from 'react';
 import '../styles/Users.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import PaginationContext from '../context/PaginationContext';
+import UserContext from '../context/UserContext';
 
 const Users = () => {
-  const [users, paginatedUsers, setUsers] = useContext(PaginationContext);
-  // console.log(users);
-  // console.log(paginatedUsers);
+  const [users, paginatedUsers, setUsers, activePage] = useContext(UserContext);
   const [selectedUsers, setSelectedUser] = useState([]);
   const handleClickAll = (event) => {
     if (!event.target.checked) {
       setSelectedUser([]);
     } else {
-      setSelectedUser(users.map((user) => user.id));
+      const currPage = ((activePage - 1) * 10) + 1;
+      setSelectedUser(users.slice(currPage - 1, currPage + 9).map((user) => user.id));
     }
   };
   const handleSingleUser = (event) => {
@@ -25,11 +24,10 @@ const Users = () => {
       ));
     }
   };
-
   const handleDeleteSelectUser = () => {
+    // console.log(selectedUsers);
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
   };
-
   const handleEditUser = () => {};
   const handleDeleteUser = () => {};
   return (

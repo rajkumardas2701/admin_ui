@@ -4,11 +4,12 @@ import fetchUsers from '../utils/apiCalls';
 import Pagination from './Pagination';
 import { fetchPaginatedUsers } from '../helper/helperMethods';
 import '../styles/App.css';
-import PaginationContext from '../context/PaginationContext';
+import UserContext from '../context/UserContext';
 
 const App = () => {
   const [users, setUsers] = useState([]);
   const [paginatedUsers, setPaginatedUsers] = useState(users);
+  const [activePage, setActivePage] = useState(1);
 
   useEffect(() => {
     fetchUsers(setUsers);
@@ -21,11 +22,15 @@ const App = () => {
     <div className="App">
       <h3>Admin UI</h3>
       <input type="text" className="search-box" />
-      {/* {console.log('paginated users in jsx', paginatedUsers)} */}
-      <PaginationContext.Provider value={[users, paginatedUsers, setUsers]}>
+      <UserContext.Provider value={[users, paginatedUsers, setUsers, activePage]}>
         <Users />
-      </PaginationContext.Provider>
-      <Pagination users={users} setPaginatedUsers={setPaginatedUsers} />
+      </UserContext.Provider>
+      <Pagination
+        users={users}
+        setPaginatedUsers={setPaginatedUsers}
+        activePage={activePage}
+        setActivePage={setActivePage}
+      />
     </div>
   );
 };
