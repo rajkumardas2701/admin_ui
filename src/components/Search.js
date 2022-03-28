@@ -27,7 +27,6 @@ const Search = ({ users, setSearchedUsers }) => {
 
 Search.propTypes = {
   users: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  // searchedUsers: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   setSearchedUsers: PropTypes.func.isRequired,
 };
 

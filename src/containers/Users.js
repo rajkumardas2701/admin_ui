@@ -3,10 +3,13 @@ import '../styles/Users.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import UserContext from '../context/UserContext';
+import EditUser from '../components/EditUser';
 
 const Users = () => {
   const [users, paginatedUsers, setUsers, activePage, loadingError] = useContext(UserContext);
   const [selectedUsers, setSelectedUser] = useState([]);
+  const [showEdit, setShowEdit] = useState(false);
+  const [userToEdit, setUserToEdit] = useState({});
   const handleClickAll = (event) => {
     if (!event.target.checked) {
       setSelectedUser([]);
@@ -27,7 +30,17 @@ const Users = () => {
   const handleDeleteSelectUser = () => {
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
   };
-  const handleEditUser = () => {};
+  const handleEditUser = (event) => {
+    // console.log('id from edit handler',
+    // typeof event.target.parentElement.parentElement.parentElement.id,
+    // event.target.parentElement.parentElement.parentElement.id,
+    // event.target.parentElement.parentElement.id);
+    // console.log(event);
+    setUserToEdit(users.filter(
+      (user) => user.id === event.target.parentElement.parentElement.id,
+    ));
+    setShowEdit(!showEdit);
+  };
   const handleDeleteUser = (event) => {
     event.preventDefault();
     setUsers(users.filter(
@@ -76,6 +89,8 @@ const Users = () => {
         )
       }
       <button type="button" onClick={handleDeleteSelectUser} className="select-delete-btn">Delete selected user(s)</button>
+      {/* {console.log(userToEdit)} */}
+      {showEdit && <EditUser userToEdit={userToEdit} />}
     </div>
   );
 };
