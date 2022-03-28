@@ -6,10 +6,17 @@ import UserContext from '../context/UserContext';
 import EditUser from '../components/EditUser';
 
 const Users = () => {
-  const [users, paginatedUsers, setUsers, activePage, loadingError] = useContext(UserContext);
+  const [
+    users,
+    setSearchedUsers,
+    paginatedUsers,
+    setUsers,
+    activePage,
+    loadingError,
+  ] = useContext(UserContext);
   const [selectedUsers, setSelectedUser] = useState([]);
   const [showEdit, setShowEdit] = useState(false);
-  const [userToEdit, setUserToEdit] = useState({});
+  const [userToEdit, setUserToEdit] = useState([]);
   const handleClickAll = (event) => {
     if (!event.target.checked) {
       setSelectedUser([]);
@@ -31,15 +38,11 @@ const Users = () => {
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
   };
   const handleEditUser = (event) => {
-    // console.log('id from edit handler',
-    // typeof event.target.parentElement.parentElement.parentElement.id,
-    // event.target.parentElement.parentElement.parentElement.id,
-    // event.target.parentElement.parentElement.id);
-    // console.log(event);
     setUserToEdit(users.filter(
-      (user) => user.id === event.target.parentElement.parentElement.id,
+      (user) => user.id === event.target.parentNode.parentNode.id,
     ));
     setShowEdit(!showEdit);
+    // $('body').not('#loading').css('filter', 'blur(3px)');
   };
   const handleDeleteUser = (event) => {
     event.preventDefault();
@@ -71,26 +74,32 @@ const Users = () => {
                 </th>
               </tr>
               {
-            paginatedUsers.map((user) => (
-              <tr key={user.id} id={user.id} className="table-rows">
-                <td><input type="checkbox" checked={selectedUsers.includes(user.id)} onChange={handleSingleUser} /></td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td>
-                  <FontAwesomeIcon icon={faPenToSquare} className="edit-user" onClick={handleEditUser} />
-                  <FontAwesomeIcon icon={faTrash} className="delete-user" onClick={handleDeleteUser} />
-                </td>
-              </tr>
-            ))
+                paginatedUsers.map((user) => (
+                  <tr key={user.id} id={user.id} className="table-rows">
+                    <td><input type="checkbox" checked={selectedUsers.includes(user.id)} onChange={handleSingleUser} /></td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                    <td id={user.id} name={user.id}>
+                      <FontAwesomeIcon icon={faPenToSquare} className="edit-user" onClick={handleEditUser} />
+                      <FontAwesomeIcon icon={faTrash} className="delete-user" onClick={handleDeleteUser} />
+                    </td>
+                  </tr>
+                ))
           }
             </tbody>
           </table>
         )
       }
       <button type="button" onClick={handleDeleteSelectUser} className="select-delete-btn">Delete selected user(s)</button>
-      {/* {console.log(userToEdit)} */}
-      {showEdit && <EditUser userToEdit={userToEdit} />}
+      {showEdit && (
+      <EditUser
+        userToEdit={userToEdit}
+        setShowEdit={setShowEdit}
+        showEdit={showEdit}
+        setSearchedUsers={setSearchedUsers}
+      />
+      )}
     </div>
   );
 };

@@ -29,7 +29,7 @@ const App = () => {
       <div className="app-body">
         <Search users={users} setSearchedUsers={setSearchedUsers} />
         <UserContext.Provider value={
-          [searchedUsers, paginatedUsers, setUsers, activePage, loadingError]
+          [searchedUsers, setSearchedUsers, paginatedUsers, setUsers, activePage, loadingError]
 }
         >
           <Users />

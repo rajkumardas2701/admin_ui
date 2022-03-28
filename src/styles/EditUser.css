@@ -1,10 +1,48 @@
 .edit-form {
-  width: 30vw;
-  border: 3px solid red;
+  width: 20vw;
+  border: 3px solid rgba(78, 21, 21, 0.253);
   height: 30vh;
   position: relative;
   top: -25vh;
   left: 25vw;
   background-color: white;
   border-radius: 10px;
+  backdrop-filter: blur(4px);
+  z-index: 99;
+}
+
+.form-elements {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  height: 4vh;
+  justify-content:space-between;
+  margin: 20px auto
+}
+
+.input-elements {
+  width: 10vw;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.form-elements > p {
+  margin: 0;
+  align-self: center;
+  font-weight: bold;
+}
+
+.btn-section {
+  margin-top: 40px !important;
+  justify-content: space-around;
+}
+
+.btn-section > button {
+  width: 5vw;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#edit-form-body {
+  backdrop-filter: blur(4px);
 }

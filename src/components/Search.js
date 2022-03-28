@@ -20,7 +20,7 @@ const Search = ({ users, setSearchedUsers }) => {
   }, [searchString]);
   return (
     <div className="search-component">
-      <input type="text" className="search-box" value={searchString} onChange={handleChange} />
+      <input type="text" className="search-box" value={searchString} onChange={handleChange} placeholder="search by user, email or role" />
     </div>
   );
 };
