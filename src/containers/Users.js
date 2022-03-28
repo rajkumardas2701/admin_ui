@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import UserContext from '../context/UserContext';
 import EditUser from '../components/EditUser';
+import ConfirmDelete from '../components/ConfirmDelete';
 
 const Users = () => {
   const [
@@ -16,6 +17,7 @@ const Users = () => {
   ] = useContext(UserContext);
   const [selectedUsers, setSelectedUser] = useState([]);
   const [showEdit, setShowEdit] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [userToEdit, setUserToEdit] = useState([]);
   const handleClickAll = (event) => {
     if (!event.target.checked) {
@@ -36,19 +38,23 @@ const Users = () => {
   };
   const handleDeleteSelectUser = () => {
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
+    setShowConfirmDelete(!showConfirmDelete);
   };
   const handleEditUser = (event) => {
     setUserToEdit(users.filter(
       (user) => user.id === event.target.parentNode.parentNode.id,
     ));
     setShowEdit(!showEdit);
-    // $('body').not('#loading').css('filter', 'blur(3px)');
   };
   const handleDeleteUser = (event) => {
     event.preventDefault();
-    setUsers(users.filter(
-      (user) => user.id !== event.target.parentNode.parentNode.parentElement.id,
+    setUserToEdit(users.filter(
+      (user) => user.id === event.target.parentNode.parentNode.parentElement.id,
     ));
+    // setUsers(users.filter(
+    //   (user) => user.id !== event.target.parentNode.parentNode.parentElement.id,
+    // ));
+    setShowConfirmDelete(!showConfirmDelete);
   };
   return (
     <div className="users-body">
@@ -100,6 +106,15 @@ const Users = () => {
         setSearchedUsers={setSearchedUsers}
       />
       )}
+      {
+        showConfirmDelete && (
+          <ConfirmDelete
+            userToEdit={userToEdit}
+            setShowConfirmDelete={setShowConfirmDelete}
+            showConfirmDelete={showConfirmDelete}
+          />
+        )
+      }
     </div>
   );
 };

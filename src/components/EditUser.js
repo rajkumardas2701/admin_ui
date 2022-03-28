@@ -55,14 +55,12 @@ EditUser.defaultProps = {
   userToEdit: [{
     id: 0, name: '', email: '', role: '',
   }],
-  // setActivePage: () => {},
 };
 
 EditUser.propTypes = {
   userToEdit: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   showEdit: PropTypes.bool.isRequired,
   setShowEdit: PropTypes.func.isRequired,
-  // setSearchedUsers: PropTypes.func.isRequired,
 };
 
 export default EditUser;
