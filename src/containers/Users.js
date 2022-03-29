@@ -37,7 +37,9 @@ const Users = () => {
     }
   };
   const handleDeleteSelectUser = () => {
-    setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
+    setUserToEdit(users.filter(
+      (user) => user.id === selectedUsers[0],
+    ));
     setShowConfirmDelete(!showConfirmDelete);
   };
   const handleEditUser = (event) => {
@@ -49,11 +51,8 @@ const Users = () => {
   const handleDeleteUser = (event) => {
     event.preventDefault();
     setUserToEdit(users.filter(
-      (user) => user.id === event.target.parentNode.parentNode.parentElement.id,
+      (user) => user.id === event.target.parentNode.parentNode.id,
     ));
-    // setUsers(users.filter(
-    //   (user) => user.id !== event.target.parentNode.parentNode.parentElement.id,
-    // ));
     setShowConfirmDelete(!showConfirmDelete);
   };
   return (
@@ -112,6 +111,8 @@ const Users = () => {
             userToEdit={userToEdit}
             setShowConfirmDelete={setShowConfirmDelete}
             showConfirmDelete={showConfirmDelete}
+            selectedUsers={selectedUsers}
+            setUsers={setUsers}
           />
         )
       }

@@ -3,13 +3,23 @@ import PropTypes from 'prop-types';
 import UserContext from '../context/UserContext';
 import '../styles/ConfirmDelete.css';
 
-const ConfirmDelete = ({ userToEdit, setShowConfirmDelete, showConfirmDelete }) => {
+const ConfirmDelete = ({
+  userToEdit,
+  setShowConfirmDelete,
+  showConfirmDelete,
+  selectedUsers,
+}) => {
   const [users, setUsers] = useContext(UserContext);
   const [{ id }] = userToEdit;
   const handleSubmit = () => {
-    setUsers(users.filter(
-      (user) => user.id !== id,
-    ));
+    if (selectedUsers.length > 0) {
+      console.log('inside if statement');
+      setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
+    } else {
+      setUsers(users.filter(
+        (user) => user.id !== id,
+      ));
+    }
     setShowConfirmDelete(!showConfirmDelete);
   };
   const handleCancel = () => {
@@ -36,6 +46,7 @@ ConfirmDelete.propTypes = {
   userToEdit: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   showConfirmDelete: PropTypes.bool.isRequired,
   setShowConfirmDelete: PropTypes.func.isRequired,
+  selectedUsers: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
 };
 
 export default ConfirmDelete;
