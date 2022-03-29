@@ -13,7 +13,6 @@ const ConfirmDelete = ({
   const [{ id }] = userToEdit;
   const handleSubmit = () => {
     if (selectedUsers.length > 0) {
-      console.log('inside if statement');
       setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
     } else {
       setUsers(users.filter(
